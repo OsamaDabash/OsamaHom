@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>تحريك المستطيل</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      box-sizing: border-box;
+      position: relative; /* لكي يتحرك المستطيل بالنسبة إلى الصفحة */
+      overflow: hidden;   /* لمنع ظهور سحب عند تحرك العناصر */
+    }
+
+    #rectangle {
+      width: 100px;
+      height: 80px;
+      background-color: red;
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+    }
+
+    #moveButton {
+      padding: 10px 20px;
+      font-size: 20px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <button id="moveButton">تحريك المستطيل</button>
+  <div id="rectangle"></div>
+
+  <script>
+    const rectangle = document.getElementById("rectangle");
+    const button = document.getElementById("moveButton");
+
+    let corners = [
+      { bottom: '20px', left: '20px' },
+      { top: '20px', left: '20px' },
+      { top: '20px', right: '20px' },
+      { bottom: '20px', right: '20px' }
+    ];
+
+    let colors = ["red", "green", "blue", "black"];
+    let index = 0;
+
+    button.addEventListener("click", () => {
+      rectangle.style.top = "";
+      rectangle.style.bottom = "";
+      rectangle.style.left = "";
+      rectangle.style.right = "";
+
+      rectangle.style.bottom = corners[index].bottom || "";
+      rectangle.style.top = corners[index].top || "";
+      rectangle.style.left = corners[index].left || "";
+      rectangle.style.right = corners[index].right || "";
+
+      rectangle.style.backgroundColor = colors[index];
+      index = (index + 1) % corners.length;
+    });
+  </script>
+</body>
+</html>
